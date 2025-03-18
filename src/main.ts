@@ -18,7 +18,9 @@ async function bootstrap() {
     .addTag('API')
     .build();
   const swagger = () => SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, swagger());
+  SwaggerModule.setup('api', app, swagger(), {
+    jsonDocumentUrl: 'api/json',
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
