@@ -25,9 +25,7 @@ export class AuthService {
 
   async signUp(email: string, password: string): Promise<{ access_token: string }> {
     const foundUser = await this.usersService.findOne({ email: email });
-
     if (foundUser) throw new ConflictException('User already exists');
-
     
     const user = await this.usersService.create({ email, password: await bcrypt.hash(password, this.saltRounds) });
     const payload = { email: user.email, sub: user.id };
