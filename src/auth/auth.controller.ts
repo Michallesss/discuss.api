@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards, UsePipes,
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ZodValidationPipe } from 'src/zod.pipe';
-import { loginSchema, loginType, registerSchema, registerType } from './schemas/sign.schemas';
+import { loginSchema, loginType, registerSchema, registerType } from './schemas/auth.schemas';
 
 
 @Controller('auth')
