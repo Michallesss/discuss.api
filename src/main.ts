@@ -6,6 +6,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Discuss.API')
     .setDescription('Discuss.it web API')
