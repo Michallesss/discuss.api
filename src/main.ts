@@ -6,17 +6,11 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // const corsOptions = {
-  //   origin: process.env.FRONTEND_URL,
-  //   credentials: true,
-  // };
-  // app.enableCors(corsOptions);
-
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('API description')
-    .setVersion('1.0')
-    .addTag('API')
+    .setTitle('Discuss.API')
+    .setDescription('Discuss.it web API')
+    .setVersion('0.1')
+    .addTag('discuss')
     .build();
   const swagger = () => SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, swagger(), {
