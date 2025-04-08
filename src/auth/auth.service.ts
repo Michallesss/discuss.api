@@ -33,12 +33,4 @@ export class AuthService {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
-
-  async getProfile(id: number) {
-    const user = await this.usersService.findOne({ id: id });
-    if (!user) throw new NotFoundException('User not found');
-
-    const { password, ...result } = user;
-    return result;
-  }
 }

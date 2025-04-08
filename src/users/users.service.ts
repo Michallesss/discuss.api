@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { User, Prisma } from '@prisma/client';
 
@@ -48,5 +48,14 @@ export class UsersService {
     return this.prisma.user.delete({
       where,
     });
+  }
+
+  // Additional 
+  async getProfile(id: number) {
+    const user = await this.findOne({ id: id });
+    if (!user) throw new NotFoundException('User not found');
+
+    const { password, ...result } = user;
+    return result;
   }
 }

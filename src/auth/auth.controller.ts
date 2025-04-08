@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards, UsePipes, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { UsersService } from 'src/users/users.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ZodValidationPipe } from 'src/zod.pipe';
 import { loginSchema, loginType, registerSchema, registerType } from './schemas/auth.schemas';
@@ -7,7 +8,10 @@ import { loginSchema, loginType, registerSchema, registerType } from './schemas/
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService,
+  ) {}
 
   @HttpCode(HttpStatus.OK)
   // u can create global Public decorator https://docs.nestjs.com/security/authentication#enable-authentication-globally
@@ -28,6 +32,6 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('me')
   getProfile(@Request() req) {
-    return this.authService.getProfile(req.user.sub);
+    return this.usersService.getProfile(req.user.sub);
   }
 }
